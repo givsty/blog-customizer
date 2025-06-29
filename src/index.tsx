@@ -4,7 +4,7 @@ import clsx from 'clsx';
 
 import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
-import { defaultArticleState } from './constants/articleProps';
+import { defaultArticleState, OptionType } from './constants/articleProps';
 
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
@@ -14,6 +14,7 @@ const root = createRoot(domNode);
 
 const App = () => {
 	const [activeForm, setActiveForm] = useState(false)
+
 	const formToggleState = ()=>{
 		setActiveForm(!activeForm)
 	}
