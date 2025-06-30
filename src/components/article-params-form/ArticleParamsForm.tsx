@@ -15,50 +15,31 @@ import {
 	backgroundColors,
 	contentWidthArr,
 	fontSizeOptions,
+	Options,
+	defaultArticleState,
 } from 'src/constants/articleProps';
 
 interface IArticleParamsFormProps {
 	formToggleState: () => void;
 	activeForm: boolean;
+	createParam: (param: Options)=> void
 }
 
 export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
-	const [selectedType, setSelectedType] = useState<OptionType>({
-		value: 'Open Sans',
-		title: 'Open Sans',
-		className: 'Open Sans',
-	});
-	const [selectedSize, setSelectedSize] = useState<OptionType>({
-		value: '18px',
-		title: '18px',
-		className: '18px',
-	});
-	const [selectedColor, setSelectedColor] = useState<OptionType>({
-		value: 'Черный',
-		title: 'Черный',
-		className: 'Черный',
-		optionClassName: 'option-black'
-	});
-	const [selectedBackground, setSelectedBackground] = useState<OptionType>({
-		value: 'Белый',
-		title: 'Белый',
-		className: 'Белый',
-		optionClassName: 'option-white'
-	});
-	const [selectedWidth, setSelectedWidth] = useState<OptionType>({
-		value: 'Широкий',
-		title: 'Широкий',
-		className: 'Широкий',
-		optionClassName: 'option-wide'
-	});
+	const [selectedType, setSelectedType] = useState<OptionType>(defaultArticleState.fontFamilyOption);
+	const [selectedSize, setSelectedSize] = useState<OptionType>(defaultArticleState.fontSizeOption);
+	const [selectedColor, setSelectedColor] = useState<OptionType>(defaultArticleState.fontColor);
+	const [selectedBackground, setSelectedBackground] = useState<OptionType>(defaultArticleState.contentWidth);
+	const [selectedWidth, setSelectedWidth] = useState<OptionType>(defaultArticleState.backgroundColor);
 
 	const submitForm = (e: React.FormEvent) => {
-		console.log('применить');
-		console.log(selectedType);
-		console.log(selectedSize);
-		console.log(selectedColor)
-		console.log(selectedType)
-		console.log(selectedWidth)
+		props.createParam({
+			font: selectedType,
+			size: selectedSize,
+			color: selectedColor,
+			backgroundColor: selectedColor,
+			width: selectedWidth
+		});
 		e.preventDefault();
 	};
 
@@ -112,7 +93,6 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 							title='Сбросить'
 							htmlType='reset'
 							type='clear'
-							onClick={() => console.log('сброс')}
 						/>
 						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>

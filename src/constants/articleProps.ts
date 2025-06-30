@@ -8,6 +8,14 @@ export const fontFamilyClasses = [
 
 export type FontFamiliesClasses = (typeof fontFamilyClasses)[number];
 
+export type Options = {
+	font: OptionType,
+	size: OptionType,
+	color: OptionType,
+	backgroundColor: OptionType,
+	width: OptionType,
+}
+
 export type OptionType = {
 	title: string;
 	value: string;
