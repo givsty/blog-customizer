@@ -18,35 +18,32 @@ const root = createRoot(domNode);
 
 const App = () => {
 	const [activeForm, setActiveForm] = useState(false);
-	const [param, setParam] = useState<Options>({
-		font: defaultArticleState.fontFamilyOption,
-		size: defaultArticleState.fontSizeOption,
-		color: defaultArticleState.fontColor,
-		backgroundColor: defaultArticleState.contentWidth,
-		width: defaultArticleState.backgroundColor,
-	})
-	
-	const createParam = (param: Options) => setParam({...param})
-	const formToggleState = () => setActiveForm(!activeForm);
-	
+	const [param, setParam] = useState<ArticleStateType>(defaultArticleState)
+
+	const createParam = (param: ArticleStateType) => setParam({...param})
+	const formToggleState = (value?: boolean) => setActiveForm(!activeForm);
+	const resetParam = (param:ArticleStateType) => setParam({...param})
 	return (
 		<main
 			className={clsx(styles.main)}
 			style={
 				{
-					'--font-family': param.font.value,
-					'--font-size': param.size.value,
-					'--font-color': param.color.value,
-					'--container-width': param.width.value,
-					'--bg-color': param.backgroundColor,
+					'--font-family': param.fontFamilyOption.value,
+					'--font-size': param.fontSizeOption.value,
+					'--font-color': param.fontColor.value,
+					'--container-width': param.contentWidth.value,
+					'--bg-color': param.backgroundColor.value,
 				} as CSSProperties
 			}>
 			<ArticleParamsForm
+				setParam={setParam}
 				formToggleState={formToggleState}
 				activeForm={activeForm}
 				createParam={createParam}
+				param={param}
+				resetParam={resetParam}
 			/>
-			<Article />
+			<Article formToggleState={formToggleState}/>
 		</main>
 	);
 };

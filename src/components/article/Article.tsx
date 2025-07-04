@@ -7,18 +7,13 @@ import { Text } from 'src/ui/text';
 import styles from './Article.module.scss';
 
 interface IArticleProps {
-	param: {
-		fontFamilyOption: string;
-		fontColor: string;
-		backgroundColor: string;
-		contentWidth: string;
-		fontSizeOption: number;
-	};
+	formToggleState: (value: boolean) => void
 }
 
-export const Article = () => {
+export const Article = (props: IArticleProps) => {
+
 	return (
-		<article className={clsx(styles.article)}>
+		<article className={clsx(styles.article)} onClick={()=> props.formToggleState(false)}>
 			<Text as='h1' size={45} weight={800} uppercase dynamicLite>
 				Портрет Западной Швейцарии
 			</Text>
