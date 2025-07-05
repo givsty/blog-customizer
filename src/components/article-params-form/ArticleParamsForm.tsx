@@ -30,12 +30,11 @@ interface IArticleParamsFormProps {
 }
 
 export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
-
 	const [selectedType, setSelectedType] = useState<OptionType>(
 		props.param.fontFamilyOption
 	);
 	const [selectedSize, setSelectedSize] = useState<OptionType>(
-		props.param.fontSizeOption
+		defaultArticleState.fontSizeOption
 	);
 	const [selectedColor, setSelectedColor] = useState<OptionType>(
 		props.param.fontColor
@@ -46,6 +45,7 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 	const [selectedWidth, setSelectedWidth] = useState<OptionType>(
 		props.param.contentWidth
 	);
+
 	const submitForm = (e: React.FormEvent) => {
 		props.createParam({
 			fontFamilyOption: selectedType,
@@ -65,8 +65,12 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 			contentWidth: defaultArticleState.contentWidth,
 			backgroundColor: defaultArticleState.backgroundColor,
 		});
-		//Временный костыль!!!!!
+		
+		setSelectedType(defaultArticleState.fontFamilyOption)
 		setSelectedSize(defaultArticleState.fontSizeOption)
+		setSelectedColor(defaultArticleState.fontColor)
+		setSelectedBackground(defaultArticleState.backgroundColor)
+		setSelectedWidth(defaultArticleState.contentWidth)
 	};
 	return (
 		<>
