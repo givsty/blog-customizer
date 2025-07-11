@@ -1,11 +1,9 @@
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import styles from './ArticleParamsForm.module.scss';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { Select } from 'src/ui/select';
-import { Option } from 'src/ui/select/Option';
 import { Separator } from 'src/ui/separator';
-import { StoryDecorator } from 'src/ui/story-decorator';
 import { Text } from 'src/ui/text';
 import { RadioGroup } from 'src/ui/radio-group';
 import {
@@ -21,7 +19,7 @@ import {
 } from 'src/constants/articleProps';
 
 interface IArticleParamsFormProps {
-	formToggleState: () => void;
+	formToggleState: (toggle?: boolean) => void;
 	activeForm: boolean;
 	createParam: (param: ArticleStateType) => void;
 	param: ArticleStateType,
@@ -65,7 +63,7 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 			contentWidth: defaultArticleState.contentWidth,
 			backgroundColor: defaultArticleState.backgroundColor,
 		});
-		
+
 		setSelectedType(defaultArticleState.fontFamilyOption)
 		setSelectedSize(defaultArticleState.fontSizeOption)
 		setSelectedColor(defaultArticleState.fontColor)
@@ -81,7 +79,7 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 				className={`${styles.container} ${
 					props.activeForm ? styles.container_open : ''
 				}`}>
-				<form className={`${styles.form}`} onSubmit={submitForm} onReset={resetForm}>
+				<form className={`${styles.form}`} onSubmit={submitForm} onReset={resetForm} onClick={e => e.stopPropagation()}>
 					<Text size={45} weight={800}>
 						Задайте параметры
 					</Text>

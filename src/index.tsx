@@ -21,8 +21,9 @@ const App = () => {
 	const [param, setParam] = useState<ArticleStateType>(defaultArticleState)
 
 	const createParam = (param: ArticleStateType) => setParam({...param})
-	const formToggleState = (value?: boolean) => setActiveForm(!activeForm);
+	const formToggleState = (toggle?: boolean) => setActiveForm(!activeForm)
 	const resetParam = (param:ArticleStateType) => setParam({...param})
+
 	return (
 		<main
 			className={clsx(styles.main)}
@@ -43,7 +44,7 @@ const App = () => {
 				param={param}
 				resetParam={resetParam}
 			/>
-			<Article formToggleState={formToggleState}/>
+			<Article setActiveForm={setActiveForm}/>
 		</main>
 	);
 };
