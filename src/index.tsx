@@ -5,9 +5,7 @@ import { Article } from './components/article/Article';
 import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
 import {
 	defaultArticleState,
-	OptionType,
 	ArticleStateType,
-	Options,
 } from './constants/articleProps';
 
 import './styles/index.scss';
@@ -18,11 +16,11 @@ const root = createRoot(domNode);
 
 const App = () => {
 	const [activeForm, setActiveForm] = useState(false);
-	const [param, setParam] = useState<ArticleStateType>(defaultArticleState)
+	const [param, setParam] = useState<ArticleStateType>(defaultArticleState);
 
-	const createParam = (param: ArticleStateType) => setParam({...param})
-	const formToggleState = (toggle?: boolean) => setActiveForm(!activeForm)
-	const resetParam = (param:ArticleStateType) => setParam({...param})
+	const createParam = (param: ArticleStateType) => setParam({ ...param });
+	const formToggleState = () => setActiveForm(!activeForm);
+	const resetParam = (param: ArticleStateType) => setParam({ ...param });
 
 	return (
 		<main
@@ -44,7 +42,7 @@ const App = () => {
 				param={param}
 				resetParam={resetParam}
 			/>
-			<Article setActiveForm={setActiveForm}/>
+			<Article setActiveForm={setActiveForm} />
 		</main>
 	);
 };

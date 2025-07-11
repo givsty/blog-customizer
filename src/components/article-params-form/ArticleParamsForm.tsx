@@ -13,7 +13,6 @@ import {
 	backgroundColors,
 	contentWidthArr,
 	fontSizeOptions,
-	Options,
 	defaultArticleState,
 	ArticleStateType,
 } from 'src/constants/articleProps';
@@ -22,9 +21,9 @@ interface IArticleParamsFormProps {
 	formToggleState: (toggle?: boolean) => void;
 	activeForm: boolean;
 	createParam: (param: ArticleStateType) => void;
-	param: ArticleStateType,
+	param: ArticleStateType;
 	resetParam: (param: ArticleStateType) => void;
-	setParam (param: ArticleStateType): void
+	setParam(param: ArticleStateType): void;
 }
 
 export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
@@ -51,7 +50,7 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 			fontColor: selectedColor,
 			contentWidth: selectedWidth,
 			backgroundColor: selectedBackground,
-		})
+		});
 		e.preventDefault();
 	};
 
@@ -64,11 +63,11 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 			backgroundColor: defaultArticleState.backgroundColor,
 		});
 
-		setSelectedType(defaultArticleState.fontFamilyOption)
-		setSelectedSize(defaultArticleState.fontSizeOption)
-		setSelectedColor(defaultArticleState.fontColor)
-		setSelectedBackground(defaultArticleState.backgroundColor)
-		setSelectedWidth(defaultArticleState.contentWidth)
+		setSelectedType(defaultArticleState.fontFamilyOption);
+		setSelectedSize(defaultArticleState.fontSizeOption);
+		setSelectedColor(defaultArticleState.fontColor);
+		setSelectedBackground(defaultArticleState.backgroundColor);
+		setSelectedWidth(defaultArticleState.contentWidth);
 	};
 	return (
 		<>
@@ -79,7 +78,11 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 				className={`${styles.container} ${
 					props.activeForm ? styles.container_open : ''
 				}`}>
-				<form className={`${styles.form}`} onSubmit={submitForm} onReset={resetForm} onClick={e => e.stopPropagation()}>
+				<form
+					className={`${styles.form}`}
+					onSubmit={submitForm}
+					onReset={resetForm}
+					onClick={(e) => e.stopPropagation()}>
 					<Text size={45} weight={800}>
 						Задайте параметры
 					</Text>
@@ -116,7 +119,7 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 						title='Ширина контента'
 					/>
 					<div className={styles.bottomContainer}>
-						<Button title='Сбросить' htmlType='reset' type='clear'/>
+						<Button title='Сбросить' htmlType='reset' type='clear' />
 						<Button title='Применить' htmlType='submit' type='apply' />
 					</div>
 				</form>
