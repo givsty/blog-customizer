@@ -16,6 +16,8 @@ import {
 	defaultArticleState,
 	ArticleStateType,
 } from 'src/constants/articleProps';
+import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
+
 
 interface IArticleParamsFormProps {
 	formToggleState: (toggle?: boolean) => void;
