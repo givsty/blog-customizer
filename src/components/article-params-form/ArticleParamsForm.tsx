@@ -17,7 +17,7 @@ import {
 	ArticleStateType,
 } from 'src/constants/articleProps';
 import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
-
+import clsx from 'clsx';
 
 interface IArticleParamsFormProps {
 	formToggleState: (toggle?: boolean) => void;
@@ -77,9 +77,9 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 				isOpen={props.activeForm}
 				onClick={props.formToggleState}></ArrowButton>
 			<aside
-				className={`${styles.container} ${
-					props.activeForm ? styles.container_open : ''
-				}`}>
+				className={clsx(styles.container, {
+					[styles.container_open]: props.activeForm
+				})}>
 				<form
 					className={`${styles.form}`}
 					onSubmit={submitForm}
