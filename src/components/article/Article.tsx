@@ -6,15 +6,10 @@ import { Text } from 'src/ui/text';
 
 import styles from './Article.module.scss';
 
-interface IArticleProps {
-	setActiveForm(toggle: boolean): void;
-}
-
-export const Article = (props: IArticleProps) => {
+export const Article = () => {
 	return (
 		<article
-			className={clsx(styles.article)}
-			onClick={() => props.setActiveForm(false)}>
+			className={clsx(styles.article)}>
 			<Text as='h1' size={45} weight={800} uppercase dynamicLite>
 				Портрет Западной Швейцарии
 			</Text>

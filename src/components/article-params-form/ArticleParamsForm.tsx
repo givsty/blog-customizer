@@ -20,33 +20,33 @@ import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
 import clsx from 'clsx';
 
 interface IArticleParamsFormProps {
-	formToggleState: (toggle?: boolean) => void;
-	activeForm: boolean;
-	createParam: (param: ArticleStateType) => void;
-	param: ArticleStateType;
-	resetParam: (param: ArticleStateType) => void;
 	setParam(param: ArticleStateType): void;
 }
 
 export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
+	const [activeForm, setActiveForm] = useState(false);
+  const createParam = (param: ArticleStateType) => props.setParam({ ...param });
+  const formToggleState = () => setActiveForm(!activeForm);
+  const resetParam = (param: ArticleStateType) => props.setParam({ ...param });
+
 	const [selectedType, setSelectedType] = useState<OptionType>(
-		props.param.fontFamilyOption
+		defaultArticleState.fontFamilyOption
 	);
 	const [selectedSize, setSelectedSize] = useState<OptionType>(
 		defaultArticleState.fontSizeOption
 	);
 	const [selectedColor, setSelectedColor] = useState<OptionType>(
-		props.param.fontColor
+		defaultArticleState.fontColor
 	);
 	const [selectedBackground, setSelectedBackground] = useState<OptionType>(
-		props.param.backgroundColor
+		defaultArticleState.backgroundColor
 	);
 	const [selectedWidth, setSelectedWidth] = useState<OptionType>(
-		props.param.contentWidth
+		defaultArticleState.contentWidth
 	);
 
 	const submitForm = (e: React.FormEvent) => {
-		props.createParam({
+		createParam({
 			fontFamilyOption: selectedType,
 			fontSizeOption: selectedSize,
 			fontColor: selectedColor,
@@ -57,7 +57,7 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 	};
 
 	const resetForm = () => {
-		props.resetParam({
+		resetParam({
 			fontFamilyOption: defaultArticleState.fontFamilyOption,
 			fontSizeOption: defaultArticleState.fontSizeOption,
 			fontColor: defaultArticleState.fontColor,
@@ -74,11 +74,11 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 	return (
 		<>
 			<ArrowButton
-				isOpen={props.activeForm}
-				onClick={props.formToggleState}></ArrowButton>
+				isOpen={activeForm}
+				onClick={formToggleState}></ArrowButton>
 			<aside
 				className={clsx(styles.container, {
-					[styles.container_open]: props.activeForm
+					[styles.container_open]: activeForm
 				})}>
 				<form
 					className={`${styles.form}`}

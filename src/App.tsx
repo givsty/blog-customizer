@@ -8,18 +8,12 @@ import {
 	defaultArticleState,
 	ArticleStateType,
 } from './constants/articleProps';
-
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
 
+
 const App = () => {
-  const [activeForm, setActiveForm] = useState(false);
   const [param, setParam] = useState<ArticleStateType>(defaultArticleState);
-
-  const createParam = (param: ArticleStateType) => setParam({ ...param });
-  const formToggleState = () => setActiveForm(!activeForm);
-  const resetParam = (param: ArticleStateType) => setParam({ ...param });
-
   return (
     <main
       className={styles.main}
@@ -34,13 +28,8 @@ const App = () => {
       }>
       <ArticleParamsForm
         setParam={setParam}
-        formToggleState={formToggleState}
-        activeForm={activeForm}
-        createParam={createParam}
-        param={param}
-        resetParam={resetParam}
       />
-      <Article setActiveForm={setActiveForm} />
+      <Article/>
     </main>
   );
 };
