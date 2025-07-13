@@ -1,7 +1,7 @@
 import { ArrowButton } from 'src/ui/arrow-button';
 import { Button } from 'src/ui/button';
 import styles from './ArticleParamsForm.module.scss';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Select } from 'src/ui/select';
 import { Separator } from 'src/ui/separator';
 import { Text } from 'src/ui/text';
@@ -18,16 +18,25 @@ import {
 } from 'src/constants/articleProps';
 import { useOutsideClickClose } from 'src/ui/select/hooks/useOutsideClickClose';
 import clsx from 'clsx';
+import { useClose } from 'src/ui/select/hooks/useClose';
 
 interface IArticleParamsFormProps {
 	setParam(param: ArticleStateType): void;
 }
 
 export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
-	const [activeForm, setActiveForm] = useState(false);
+	const [activeForm, setActiveForm] = useState<boolean>(false);
   const createParam = (param: ArticleStateType) => props.setParam({ ...param });
   const formToggleState = () => setActiveForm(!activeForm);
+	const formClose = () => setActiveForm(false)
   const resetParam = (param: ArticleStateType) => props.setParam({ ...param });
+	const ref = useRef<HTMLDivElement>(null)
+
+	const closeForm = useClose({
+		isOpen: activeForm, 
+		rootRef: ref,
+		onClose: formClose
+	})
 
 	const [selectedType, setSelectedType] = useState<OptionType>(
 		defaultArticleState.fontFamilyOption
@@ -77,6 +86,8 @@ export const ArticleParamsForm = (props: IArticleParamsFormProps) => {
 				isOpen={activeForm}
 				onClick={formToggleState}></ArrowButton>
 			<aside
+				onClick={()=> closeForm}
+				ref={ref}
 				className={clsx(styles.container, {
 					[styles.container_open]: activeForm
 				})}>
